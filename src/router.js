@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Feather } from '@expo/vector-icons'
+import { Feather, Ionicons } from '@expo/vector-icons'
 import { TouchableOpacity } from 'react-native'
 
 import Home from "./pages/home";
@@ -35,11 +35,26 @@ export default function Routes(){
                 <Stack.Screen 
                     name="detail"
                     component={Detail}
-                    options={{
+                    options={({ navigation }) => ({
                         title: "Detalhe",
-                        headerTitleStyle: {
+                        headerTitleAlign: 'left',
+                        headerTitleStyle: { 
+                            fontSize: 20, 
+                            fontWeight: 'bold', 
                             fontFamily: 'Montserrat_700Bold',
                         },
+                        headerLeft: () => (
+                            <TouchableOpacity 
+                                onPress={() => navigation.goBack()} 
+                                style={{ marginLeft: 10 }}
+                            >
+                                <Ionicons 
+                                    name="chevron-back" 
+                                    size={32} 
+                                    color="black" 
+                                />
+                            </TouchableOpacity>
+                        ),
                         headerRight: () => (
                             <TouchableOpacity style={{marginRight: 15}}>
                                 <Feather
@@ -49,7 +64,7 @@ export default function Routes(){
                                 />
                             </TouchableOpacity>
                         )
-                    }}    
+                    })}   
                 />
             </Stack.Navigator>
         </NavigationContainer>
